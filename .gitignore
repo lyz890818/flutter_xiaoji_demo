@@ -1,1 +1,9 @@
 build
+/ios/.symlinks
+/ios/Flutter/App.framework
+/ios/Flutter/flutter_assets
+/ios/Flutter/Flutter.framework
+/ios/Podfile.lock
+/ios/Pods
+/ios/Runner.xcworkspace/xcshareddata
+/ios/ServiceDefinitions.json
