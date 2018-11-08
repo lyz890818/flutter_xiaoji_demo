@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("知识"),
+        title: new Text("知识小集"),
       ),
       body: new Column(
         children: <Widget>[
@@ -181,7 +181,7 @@ class ArticalCell extends StatelessWidget {
       onTap: () {
         Navigator.push(context,
             new MaterialPageRoute(builder: (BuildContext context) {
-          return new ArticleScreen(fid: articleModel.fid);
+          return new ArticleScreen(fid: articleModel.fid,articleTitle: articleModel.title);
         }));
       },
     );
