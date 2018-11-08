@@ -107,17 +107,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
-//  child: RefreshIndicator(
-//  child: LoadMore(
-//  child: new ListView.builder(
-//  padding: new EdgeInsets.all(8.0),
-//  reverse: false,
-//  itemBuilder: (_, int index) => _cell[index],
-//  itemCount: _cell.length,
-//  ),
-//  onLoadMore: _onLoadMore),
-//  onRefresh: _onRefresh,
-//  ),
   //下拉刷新
   Future<Null> _onRefresh() async {
     pageIndex = 1;

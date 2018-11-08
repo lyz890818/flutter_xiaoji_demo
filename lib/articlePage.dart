@@ -20,6 +20,7 @@ class ArticleScreen extends StatefulWidget {
 
 class ArticleScreenState extends State<ArticleScreen> {
   feed article;
+  String content;
 
   @override
   void initState() {
@@ -54,7 +55,7 @@ class ArticleScreenState extends State<ArticleScreen> {
 
     setState(() {
       article = feed.fromJson(result);
-
+      content = '## **${article.title}** \n##### *作者：${article.author}*\n--- \n--- \n' + article.content;
     });
   }
 
@@ -62,55 +63,10 @@ class ArticleScreenState extends State<ArticleScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-//      appBar: new AppBar(
-//        title: new Text(''),
-//      ),
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          // These are the slivers that show up in the "outer" scroll view.
-          return <Widget>[
-            SliverOverlapAbsorber(
-              // This widget takes the overlapping behavior of the SliverAppBar,
-              // and redirects it to the SliverOverlapInjector below. If it is
-              // missing, then it is possible for the nested "inner" scroll view
-              // below to end up under the SliverAppBar even when the inner
-              // scroll view thinks it has not been scrolled.
-              // This is not necessary if the "headerSliverBuilder" only builds
-              // widgets that do not overlap the next sliver.
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-              child: SliverAppBar(
-                title: const Text('小集'), // This is the title in the app bar.
-                pinned: false,
-                expandedHeight: 0.0,
-                // The "forceElevated" property causes the SliverAppBar to show
-                // a shadow. The "innerBoxIsScrolled" parameter is true when the
-                // inner scroll view is scrolled beyond its "zero" point, i.e.
-                // when it appears to be scrolled below the SliverAppBar.
-                // Without this, there are cases where the shadow would appear
-                // or not appear inappropriately, because the SliverAppBar is
-                // not actually aware of the precise position of the inner
-                // scroll views.
-                forceElevated: innerBoxIsScrolled,
-
-              ),
-            ),
-          ];
-        },
-          body: new Column(
-            children: <Widget>[
-              new Container(
-                padding: EdgeInsets.all(0.0),
-                child: new Text(article == null ? '' : article.title,style: TextStyle(fontSize: 20),textAlign: TextAlign.left),
-                alignment: AlignmentDirectional.center,
-                height: 60.0,
-              ),
-              new Divider(height: 1, color: Colors.black38),
-              new Expanded(child: new Markdown(
-                  data: article == null ? '' : article.content,
-                  onTapLink: _onClickUrl,
-              )),
-            ],
-          ),
+      appBar: AppBar(title: Text("小集"),),
+      body: new Markdown(
+        data: article == null ? '' : content,
+        onTapLink: _onClickUrl,
       ),
     );
   }
@@ -128,12 +84,3 @@ class ArticleScreenState extends State<ArticleScreen> {
         }));
   }
 }
-//
-//new Column(
-//children: <Widget>[
-//new Text(article == null ? '' : article.title,style: TextStyle(fontSize: 20)),
-//new Divider(height: 1, color: Colors.black38),
-//new Expanded(child: new Markdown(data: article == null ? '' : article.content)),
-//
-//],
-//),
